@@ -2,7 +2,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [("schedule", "0002_event_color_event")]
 
     operations = [
@@ -41,8 +40,14 @@ class Migration(migrations.Migration):
             name="start",
             field=models.DateTimeField(verbose_name="start", db_index=True),
         ),
-        migrations.AlterIndexTogether(name="event", index_together={("start", "end")}),
-        migrations.AlterIndexTogether(
-            name="occurrence", index_together={("start", "end")}
+        migrations.AddIndex(
+            model_name="event",
+            index=models.Index(fields=["start", "end"], name="event_start_end_idx"),
+        ),
+        migrations.AddIndex(
+            model_name="occurrence",
+            index=models.Index(
+                fields=["start", "end"], name="occurrence_start_end_idx"
+            ),
         ),
     ]

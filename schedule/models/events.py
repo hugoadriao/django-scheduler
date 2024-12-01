@@ -92,7 +92,9 @@ class Event(models.Model):
     class Meta:
         verbose_name = _("event")
         verbose_name_plural = _("events")
-        index_together = (("start", "end"),)
+        indexes = [
+            models.Index(fields=["start", "end"], name="event_start_end_idx"),
+        ]
 
     def __str__(self):
         return gettext("%(title)s: %(start)s - %(end)s") % {
@@ -571,7 +573,12 @@ class EventRelation(models.Model):
     class Meta:
         verbose_name = _("event relation")
         verbose_name_plural = _("event relations")
-        index_together = [("content_type", "object_id")]
+        indexes = [
+            models.Index(
+                fields=["content_type", "object_id"],
+                name="eventrelation_content_type_object_id_idx",
+            ),
+        ]
 
     def __str__(self):
         return "{}({})-{}".format(
@@ -594,7 +601,9 @@ class Occurrence(models.Model):
     class Meta:
         verbose_name = _("occurrence")
         verbose_name_plural = _("occurrences")
-        index_together = (("start", "end"),)
+        indexes = [
+            models.Index(fields=["start", "end"], name="occurrence_start_end_idx"),
+        ]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

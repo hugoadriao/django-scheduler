@@ -231,7 +231,12 @@ class CalendarRelation(models.Model):
     class Meta:
         verbose_name = _("calendar relation")
         verbose_name_plural = _("calendar relations")
-        index_together = [("content_type", "object_id")]
+        indexes = [
+            models.Index(
+                fields=["content_type", "object_id"],
+                name="calendarrelation_content_type_object_id_idx",
+            ),
+        ]
 
     def __str__(self):
         return "{} - {}".format(self.calendar, self.content_object)
