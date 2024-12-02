@@ -21,15 +21,13 @@ class Migration(migrations.Migration):
         migrations.AddIndex(
             model_name="calendarrelation",
             index=models.Index(
-                fields=["content_type", "object_id"],
-                name="calendarrelation_content_type_object_id_idx",
+                fields=["content_type", "object_id"], name="calendarrelation_idx"
             ),
         ),
         migrations.AddIndex(
             model_name="eventrelation",
             index=models.Index(
-                fields=["content_type", "object_id"],
-                name="eventrelation_content_type_object_id_idx",
+                fields=["content_type", "object_id"], name="eventrelation_idx"
             ),
         ),
         migrations.AlterField(

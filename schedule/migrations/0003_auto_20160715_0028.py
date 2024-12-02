@@ -42,12 +42,10 @@ class Migration(migrations.Migration):
         ),
         migrations.AddIndex(
             model_name="event",
-            index=models.Index(fields=["start", "end"], name="event_start_end_idx"),
+            index=models.Index(fields=["start", "end"], name="event_idx"),
         ),
         migrations.AddIndex(
             model_name="occurrence",
-            index=models.Index(
-                fields=["start", "end"], name="occurrence_start_end_idx"
-            ),
+            index=models.Index(fields=["start", "end"], name="occurrence_idx"),
         ),
     ]
